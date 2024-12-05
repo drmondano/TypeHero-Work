@@ -110,5 +110,60 @@ type TruckDriverBonusGiver = Donations['Taylor Swift'];
 ```
 The 'keyof' operator Module
 ```
+type Artists = typeof casettesByArtist;
 
+type Artist = keyof Artists;
 ```
+Generic Type Arguments Module
+```
+type GroceryStore<Name extends string, City extends string> = {
+	name: Name,
+	city: City
+}
+
+type GroceryItem<Name extends string, Price extends number, InStock extends boolean> = {
+	name: Name,
+	price: Price,
+	inStock: InStock
+};
+
+type CapreseSalad = GroceryItem<'Caprese Salad', 14.99, true>
+```
+Generic Type Constraints Module
+```
+type AllowString<T extends string> = T;
+type AllowNumber<T extends number> = T;
+
+type LoggerArg = (arg: number) => void;
+
+type CreateLogger<T extends LoggerArg> = {
+	log: T;
+	exit: () => void;
+};
+```
+Mapped Object Types Module
+```
+type MovieInfoByGenre<T extends object> = {
+	[K in keyof T]: {
+		name: T[K] | string;
+		year: number;
+		director: string;
+	}
+};
+```
+Generic Function Arguments Module
+```
+const identity: <T>(n: T) => T = n => n;
+
+const mapArray:<T,U>(arr: T[], fn: (str: T) => U) => U[] = (arr, fn) => arr.map(fn);
+```
+Default Generic Arguments Module
+```
+type ApiRequest<TData, TMethod = 'GET'> = {
+	data: TData;
+	method: TMethod;
+};
+
+type TSConfig<T = { strict: true }> = T;
+```
+Complete!
